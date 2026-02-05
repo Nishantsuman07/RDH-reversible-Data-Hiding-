@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PEVO Image Embedding</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top left, #b19cd9, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 60px 50px;
+      border-radius: 25px;
+      width: 650px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      z-index: -1;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #6C63FF, #9b5ba4, #6C63FF);
+      background-size: 400% 400%;
+      animation: gradientBorder 6s ease infinite;
+    }
+
+    @keyframes gradientBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 400;
+      color: #cbc7cd;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .pevo-title {
+      color: #402147;
+      font-size: 60px;
+      letter-spacing: 15px;
+      display: inline-block;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    p {
+      font-size: 18px;
+      color: #402147;
+      margin-bottom: 40px;
+    }
+
+    .upload-box {
+      border: 3px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      padding: 40px 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .custom-file-upload {
+      background-color: #9b5ba4;
+      color: white;
+      padding: 14px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #7b4583;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #file-name {
+      margin-top: 20px;
+      color: #402147;
+      font-size: 17px;
+      text-align: center;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    button {
+      background-color: #9b5ba4;
+      color: white;
+      border: none;
+      padding: 14px 38px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(155, 91, 164, 0.3);
+    }
+
+    button:hover {
+      background-color: #7b4583;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 700px) {
+      .card {
+        width: 90%;
+        padding: 40px 25px;
+      }
+
+      .pevo-title {
+        font-size: 44px;
+        letter-spacing: 10px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1><span class="pevo-title">PEVO</span><br>Image Embedding</h1>
+    <p>Upload an image to securely embed data using the PEVO method.</p>
+    <form method="POST" enctype="multipart/form-data">
+      <div class="upload-box">
+        <label for="file-input" class="custom-file-upload">Choose File</label>
+        <input type="file" name="file" id="file-input" accept="image/*" required />
+        <div id="file-name">No file chosen</div>
+      </div>
+      <button type="submit">⬆️ Process Image</button>
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', () => {
+      const fileName = fileInput.files[0]?.name || "No file chosen";
+      fileNameDisplay.textContent = fileName;
+    });
+  </script>
+</body>
+</html>
