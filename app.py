@@ -55,7 +55,7 @@ def upload_file():
 
     return render_template('upload.html')
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Create upload directory if it doesn't exist
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
